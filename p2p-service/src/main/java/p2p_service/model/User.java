@@ -2,27 +2,24 @@ package p2p_service.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Data
-@Document(collection = "transactions")
-public class Transaction {
+@Document(collection = "users")
+public class User {
 
     @Id
     private String id;
 
-    private String senderId;
-    private String receiverId;
-
     @Field(targetType = FieldType.DECIMAL128)
-    private BigDecimal amount;
+    private BigDecimal balance;
 
-    private TransactionStatus status;
-    private String failureReason;
-    private Instant createdAt;
+    // Optimistic locking: a concurrent update to the same wallet fails instead of overwriting it
+    @Version
+    private Long version;
 }
