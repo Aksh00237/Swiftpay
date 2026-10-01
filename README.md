@@ -29,17 +29,29 @@ Supports peer-to-peer transfers (P2P), merchant payments with a platform commiss
 | recharge-service | 8083 (+8087, 8088) | Mobile recharge requests (Jio, Airtel, Vi) |
 | frontend | 3000 | React UI for all three flows |
 
-**Tech stack:** Java 17, Spring Boot 4, Spring Data MongoDB, MongoDB 7 (replica set), React, Gradle, Lombok.
+**Tech stack:** Java 17, Spring Boot 4, Spring Data MongoDB, MongoDB (replica set), React, Gradle, Lombok.
 
 ## Running locally
 
-**Prerequisites:** JDK 17+, Node 18+, and Docker (or a local MongoDB started as a replica set).
+**Prerequisites:** JDK 17+, Node 18+, MongoDB 7+ (with `mongosh`).
 
-1. **Start MongoDB as a replica set** (needed for transactions):
+1. **Run MongoDB as a single-node replica set** (multi-document transactions need a replica set).
+
+   macOS (Homebrew):
    ```bash
-   docker compose up -d
+   brew tap mongodb/brew && brew install mongodb-community
    ```
-   Without Docker, start `mongod --replSet rs0` and run `rs.initiate()` once in `mongosh`.
+   Add this to `mongod.conf` (`/opt/homebrew/etc/mongod.conf` on Apple Silicon, `/usr/local/etc/mongod.conf` on Intel):
+   ```yaml
+   replication:
+     replSetName: rs0
+   ```
+   Then restart and initiate once:
+   ```bash
+   brew services restart mongodb-community
+   mongosh --eval "rs.initiate()"
+   ```
+   A free MongoDB Atlas cluster also works (it is a replica set by default); set `spring.mongodb.uri` to its connection string.
 
 2. **Seed demo wallets:**
    ```bash
