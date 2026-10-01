@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api";
+import API, { getErrorMessage } from "../services/api";
 
 function P2P() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function P2P() {
             });
             setResult(res.data);
         } catch (err) {
-            setError("Transaction failed. Please verify the details and try again.");
+            setError(getErrorMessage(err, "Transaction failed. Please verify the details and try again."));
         } finally {
             setLoading(false);
         }

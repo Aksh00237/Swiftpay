@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { P2M_API } from "../services/api";
+import { P2M_API, getErrorMessage } from "../services/api";
 
 function P2M() {
     const navigate = useNavigate();
@@ -21,8 +21,8 @@ function P2M() {
                 amount: Number(amount),
             });
             setResult(res.data);
-        } catch {
-            setError("Payment failed. Please check your details and try again.");
+        } catch (err) {
+            setError(getErrorMessage(err, "Payment failed. Please check your details and try again."));
         } finally {
             setLoading(false);
         }

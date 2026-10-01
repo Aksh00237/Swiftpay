@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { getRechargeBase } from "../services/api";
+import { getRechargeBase, getErrorMessage } from "../services/api";
 
 const OPERATORS = [
     {
@@ -82,7 +82,7 @@ function Recharge() {
             });
             setSuccess(true);
         } catch (err) {
-            setError("Recharge failed. Please check your details and try again.");
+            setError(getErrorMessage(err, "Recharge failed. Please check your details and try again."));
         } finally {
             setLoading(false);
         }
