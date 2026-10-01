@@ -1,0 +1,19 @@
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Gradle / Java
+.gradle/
+build/
+out/
+*.class
+
+# Node
+node_modules/
+frontend/build/
+
+# Env / logs
+.env
+*.log
