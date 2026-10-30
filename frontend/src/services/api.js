@@ -10,6 +10,15 @@ export const P2M_API = axios.create({
     baseURL: "http://localhost:8082",
 });
 
+// Escrow (Safe Pay) service. Identity is sent in the X-User-Id header (no login yet).
+export const ESCROW_API = axios.create({
+    baseURL: "http://localhost:8084",
+});
+
+export const asUser = (userId, extra = {}) => ({
+    headers: { "X-User-Id": userId, ...extra },
+});
+
 // Recharge service instances.
 // NOTE: this is client-side random instance selection for local demo purposes only,
 // not real load balancing. In production this belongs behind an API gateway / load balancer.

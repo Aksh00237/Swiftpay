@@ -45,17 +45,17 @@ function Home() {
             glow: "rgba(217,119,6,0.35)",
         },
         {
-            label: "Balance",
-            sublabel: "View wallet",
+            label: "Safe Pay",
+            sublabel: "Escrow for buying",
             icon: (
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
+                    <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
+                    <path d="M9 12l2 2 4-4" />
                 </svg>
             ),
-            route: null,
-            accent: "#3B82F6",
-            glow: "rgba(59,130,246,0.35)",
+            route: "/escrow",
+            accent: "#0D9488",
+            glow: "rgba(13,148,136,0.35)",
         },
     ];
 
