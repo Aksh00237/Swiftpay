@@ -1,0 +1,28 @@
+package escrow_service.model;
+
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+
+import java.math.BigDecimal;
+
+/**
+ * Same wallet document that p2p-service and p2m-service use.
+ */
+@Data
+@Document(collection = "users")
+public class User {
+
+    @Id
+    private String id;
+
+    @Field(targetType = FieldType.DECIMAL128)
+    private BigDecimal balance;
+
+    // Optimistic locking: a concurrent update to the same wallet fails instead of overwriting it
+    @Version
+    private Long version;
+}
